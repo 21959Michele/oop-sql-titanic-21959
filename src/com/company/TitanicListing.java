@@ -1,8 +1,10 @@
 package com.company;
 
-import com.company.models.*;
+import com.company.models.Passenger;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.sql.*;
 import java.util.List;
 
@@ -12,7 +14,7 @@ public class TitanicListing extends JFrame {
     public TitanicListing() {
 
         String[] columns = new String[]{
-                "name", "gender", "age"
+                "Name", "Gender", "Age"
         };
 
         DefaultTableModel model = new DefaultTableModel();
@@ -21,12 +23,8 @@ public class TitanicListing extends JFrame {
 
         JTable table = new JTable(model);
 
-        // model.addRow(new Object[]{"testName1", "testGender1", 24});
-        // model.addRow(new Object[]{"testName2", "testGender2", 25});
-        // model.addRow(new Object[]{"testName3", "testGender3", 26});
-
         TitanicQueries tq = new TitanicQueries();
-        List<Passenger> passengers =  tq.getPassengersByName("james");
+        List<Passenger> passengers =  tq.getPassengersByNameAndGender("Mary", "female");
 
         for(Passenger p : passengers) {
 
@@ -38,6 +36,7 @@ public class TitanicListing extends JFrame {
 
         this.add(new JScrollPane(table));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setBackground(Color.BLACK);
         this.pack();
         this.setVisible(true);
 
